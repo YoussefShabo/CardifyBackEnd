@@ -9,11 +9,21 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework import generics
+from .serializers import DeckSerializer
+from .models import Deck
 
 from social_django.utils import psa
 
 from requests.exceptions import HTTPError
 
+class DeckList(generics.ListCreateAPIView):
+    queryset = Deck.objects.all().order_by('id')
+    serializer_class = DeckSerializer
+
+class DeckDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Deck.objects.all().order_by('id')
+    serializer_class = DeckSerializer
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -49,3 +59,4 @@ def authentication_test(request):
             'message': "User successfully authenticated"
         },
         status=status.HTTP_200_OK,
+    )
