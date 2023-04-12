@@ -3,5 +3,5 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.cardify_view, name="cardify_view"),
+    path('cardify', views.cardify_view.as_view(), name="cardify_view"),
 ]

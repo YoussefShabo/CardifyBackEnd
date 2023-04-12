@@ -33,10 +33,21 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+from rest_framework.authtoken.models import Token
+
+token = Token.objects.create(user=...)
+print(token.key)
 
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +57,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'cardify_backend',
     'allauth',
+    'rest_framework',
+    'users.apps.UsersConfig',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
