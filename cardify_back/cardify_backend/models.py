@@ -11,7 +11,10 @@ SUBJECT_CHOICES = [
 class Deck(models.Model):
     title = models.CharField(max_length=32)
     subject = models.CharField(choices=SUBJECT_CHOICES, default='math')
+    topic = models.CharField()
+    classs = models.Charfield()
     comments = models.CharField()
+    datecreated = models.DateField(default=date.today)
 
 class Card(models.Model):
     deck = models.ForeignKey(Deck, on_delete = models.CASCADE)
