@@ -13,8 +13,8 @@ class Deck(models.Model):
     subject = models.CharField(choices=SUBJECT_CHOICES, default='math')
     comments = models.CharField()
 
-class Card(model.Models):
-    deck = models.ForeignKey(Deck)
+class Card(models.Model):
+    deck = models.ForeignKey(Deck, on_delete = models.CASCADE)
     question = models.CharField()
     answer = models.CharField()
     image = models.CharField()
